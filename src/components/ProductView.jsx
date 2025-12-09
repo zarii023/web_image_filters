@@ -215,6 +215,18 @@ const ProductView = () => {
     }
   };
 
+  const handleFileUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        setCapturedImage(event.target.result);
+        setCurrentStep('results');
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleAutoCapture = async (imageData) => {
     setCapturedImage(imageData);
     setIsProcessing(true);
@@ -355,9 +367,24 @@ const ProductView = () => {
                     <button className="flex-1 px-4 py-2 bg-gray-900 text-white rounded">Añadir a la bolsa</button>
                     <div className="text-gray-900 font-bold">€{product.price}</div>
                   </div>
-                  <button onClick={() => (currentStep === 'camera' ? capturePhoto() : startCamera())} className="w-full px-4 py-3 btn-outline rounded">
-                    {currentStep === 'camera' ? 'Tomar foto' : 'Probar filtro'}
-                  </button>
+                  <div className="flex gap-2 w-full">
+                    <button onClick={() => (currentStep === 'camera' ? capturePhoto() : startCamera())} className="flex-1 px-4 py-3 btn-outline border border-gray-900 text-gray-900 rounded hover:bg-gray-50">
+                      {currentStep === 'camera' ? 'Tomar foto' : 'Usar cámara'}
+                    </button>
+                    {currentStep !== 'camera' && (
+                      <>
+                        <input type="file" accept="image/*" onChange={handleFileUpload} className="hidden" id="upload-photo" />
+                        <label htmlFor="upload-photo" className="flex-1 px-4 py-3 btn-outline border border-gray-900 text-gray-900 rounded hover:bg-gray-50 text-center cursor-pointer flex items-center justify-center">
+                          Subir foto
+                        </label>
+                      </>
+                    )}
+                    {currentStep === 'camera' && (
+                      <button onClick={() => setCurrentStep('info')} className="flex-1 px-4 py-3 btn-outline border border-gray-900 text-gray-900 rounded hover:bg-gray-50">
+                        Cancelar
+                      </button>
+                    )}
+                  </div>
                   
                 </div>
               </div>
