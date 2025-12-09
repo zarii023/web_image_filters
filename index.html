@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Image Filter</title>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh@0.4.1633559619/face_mesh.js"></script>
+    <script>
+      tailwind = window.tailwind || {};
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'md-green': '#0C7A59',
+              'md-green-700': '#075c41'
+            },
+            fontFamily: {
+              serif: ["Merriweather", "serif"],
+              sans: ["Inter", "system-ui", "sans-serif"]
+            }
+          }
+        }
+      };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      :root{
+        --md-green:#0C7A59;
+      }
+      body{background:#fff;color:#111;font-family:Inter,system-ui,sans-serif}
+      .btn-outline{border:1px solid #000;color:#111;background:#fff}
+      .btn-outline:hover{background:#f8f8f8}
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
